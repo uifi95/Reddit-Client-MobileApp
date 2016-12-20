@@ -19,6 +19,7 @@ import com.example.uifi95.redditclient.repo.ArticleRepo;
 import com.example.uifi95.redditclient.repo.IArticleRepo;
 import com.example.uifi95.redditclient.repo.RealmArticleRepo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.Realm;
@@ -34,13 +35,13 @@ public class ArticleListActivity extends AppCompatActivity {
     IArticleRepo repo;
     ArticleController controller;
 
-    public void updateArticle(int id, String title, String content){
-        controller.updateArticle(id, title, content, new Date(), 0);
+    public void updateArticle(int id, String title, String content, Date postDate){
+        controller.updateArticle(id, title, content, postDate, 0);
         adapter.notifyDataSetChanged();
     }
 
-    public void addArticle(String title, String content){
-        System.out.println(controller.addArticle(title, content, new Date(), 0).getTitle());
+    public void addArticle(String title, String content, Date postDate){
+        System.out.println(controller.addArticle(title, content, postDate, 0).getTitle());
         adapter.notifyDataSetChanged();
     }
 
@@ -81,11 +82,15 @@ public class ArticleListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Article currentArticle = (Article) adapter.getItem(i);
                 Bundle state = new Bundle();
-
+                Calendar postDate = Calendar.getInstance();
+                postDate.setTime(currentArticle.getPostDate());
                 state.putBoolean("addState", false);
                 state.putString("title", currentArticle.getTitle());
                 state.putString("content", currentArticle.getContent());
                 state.putInt("id", currentArticle.getId());
+                state.putInt("day", postDate.get(Calendar.DAY_OF_MONTH));
+                state.putInt("month", postDate.get(Calendar.MONTH));
+                state.putInt("year", postDate.get(Calendar.YEAR));
 
                 ArticleInputDialog editDialog = new ArticleInputDialog();
                 editDialog.setArguments(state);

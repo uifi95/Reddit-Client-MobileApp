@@ -4,41 +4,50 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimary"
     tools:context="com.example.uifi95.redditclient.activities.MainActivity">
 
 
+    <EditText
+        android:id="@+id/EmailBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/EmailSend"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
     <Button
-        android:text="Article List"
+        android:id="@+id/ArticleRepo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:id="@+id/ArticleRepo" />
+        android:text="Article List" />
 
     <Button
-        android:text="Send"
+        android:id="@+id/EmailSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ChartButton"
+        android:layout_alignEnd="@+id/ChartButton"
+        android:layout_alignStart="@+id/ChartButton"
+        android:text="Send" />
+
+    <Button
+        android:text="Chart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ArticleRepo"
+        android:layout_alignEnd="@+id/ArticleRepo"
         android:layout_alignStart="@+id/ArticleRepo"
-        android:id="@+id/EmailSend"
-        android:layout_alignEnd="@+id/ArticleRepo" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text=""
-        android:ems="10"
-        android:layout_above="@+id/EmailSend"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/EmailBody" />
+        android:id="@+id/ChartButton" />
 
 </RelativeLayout>

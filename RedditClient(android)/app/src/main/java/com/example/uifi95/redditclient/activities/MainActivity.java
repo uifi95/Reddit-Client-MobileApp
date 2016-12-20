@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.uifi95.redditclient.R;
+import com.example.uifi95.redditclient.fragments.ChartFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody.getText());
                 startActivity(emailIntent);
+            }
+        });
+
+        Button chartButton = (Button) findViewById(R.id.ChartButton);
+        chartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new ChartFragment().show(getFragmentManager(), "chart");
             }
         });
 

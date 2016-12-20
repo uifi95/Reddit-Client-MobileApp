@@ -7,11 +7,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.uifi95.redditclient.R;
 import com.example.uifi95.redditclient.activities.ArticleListActivity;
 import com.example.uifi95.redditclient.model.Article;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by uifi95 on 11.12.2016.
@@ -29,11 +33,13 @@ public class ArticleInputDialog extends DialogFragment {
 
         final EditText title = (EditText) articleInputView.findViewById(R.id.title);
         final EditText content = (EditText) articleInputView.findViewById(R.id.content);
+        final DatePicker postDate = (DatePicker) articleInputView.findViewById(R.id.postDate);
 
 
         if (!addState) {
             title.setText(args.getString("title"));
             content.setText(args.getString("content"));
+            postDate.updateDate(args.getInt("year"), args.getInt("month"), args.getInt("day"));
         }
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
@@ -43,10 +49,17 @@ public class ArticleInputDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         ArticleListActivity list = (ArticleListActivity) getActivity();
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(postDate.getYear(), postDate.getMonth(), postDate.getDayOfMonth());
                         if (!addState){
-                            list.updateArticle(args.getInt("id"), title.getText().toString(), content.getText().toString());
+                            list.updateArticle(args.getInt("id"),
+                                    title.getText().toString(),
+                                    content.getText().toString(),
+                                    calendar.getTime());
                         } else {
-                            list.addArticle(title.getText().toString(), content.getText().toString());
+                            list.addArticle(title.getText().toString(),
+                                    content.getText().toString(),
+                                    calendar.getTime());
                         }
                     }
                 })
